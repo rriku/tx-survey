@@ -1,0 +1,264 @@
+/// mix in /// 
+@mixin basic-transition($sec:0.3){
+    transition:all #{$sec}s;
+    -webkit-transition:all #{$sec}s;
+}
+@mixin flex {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display:flex;
+	-ms-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	flex-wrap:wrap;
+}
+@mixin break_smp($wi:480) {
+    @media screen and (max-width:#{$wi}px) {
+        @content;
+    }
+}
+@mixin break_pc($wi:480) {
+    @media screen and (min-width:#{$wi}px) {
+        @content;
+    }
+}
+/// mix in ///
+
+body{
+    color: #FFF;
+    background-color: #000;
+    margin: 0;
+    font-family: 'Kosugi Maru', sans-serif;
+    font-size: 16px;
+    @include break_smp(){
+        font-size: 3.5vw;
+    }
+}
+#simid_creative{
+    opacity: 0;
+    @include basic-transition();
+    &.show{
+        opacity: 1;
+    }
+    @include break_pc(){
+        padding: 1.5vw;
+    }
+    *{
+        word-break: break-all;
+    }
+}
+.simid_creative_wrapper{
+    min-height: 100px;
+    min-width: 100px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    // padding: 10px;
+    div{
+        margin-top: 10px;
+    }
+    #button_privacy{
+        text-align: center;
+        padding: 5px;
+        color: #fff;
+        cursor: pointer;
+        width: 30px;
+        position: absolute;
+        top: 10px;
+        right: 1.5vw;
+        opacity: 0.8;
+        @include basic-transition();
+        z-index: 9999;
+        &:hover{
+            opacity: 0.5;
+        }
+        @include break_smp(){
+            top: auto;
+            top: 0;
+            right: 25px;
+            left: auto;
+            width: 20px;
+        }
+    }
+
+    #button_fullscreen{
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        position: absolute;
+        top: auto;
+        bottom: 20px;
+        right: 0;
+        left: auto;
+        width: 10px;
+        opacity: 0.8;
+        @include basic-transition();
+        z-index: 9999;
+        display: none;
+        @include break_pc(){
+            display: none;
+            // bottom: 150px;
+        }
+    }
+
+    .options{
+        ul{
+            @include flex();
+            justify-content: left;
+            li{
+                list-style: none;
+                padding: 0 2vw;
+                background-color: rgba(255, 255, 255, 0.2);
+                @include basic-transition();
+                cursor: pointer;
+                width: 49%;
+                margin-right: 2%;
+                margin-bottom: 15px;
+                position: relative;
+                @include break_smp(){
+                    margin-bottom: 2vw; 
+                }
+                &:nth-child(2n){
+                    margin-right: 0;
+                }
+                &:hover{
+                   background-color: rgba(255, 255, 255, 0.1); 
+                }
+                input[type=radio] {
+                    display: none; // 一旦
+                }
+                label{
+                    cursor: pointer;
+                    /* display: block; */
+                    /* float: right;
+                    width: 95%; */
+                    line-height: 150%;
+                    @include break_smp(){
+                        line-height: 110%;;
+                    }
+                }
+                &#button_submit{
+                    background-color: #000;
+                    span{
+                        padding-left: 0!important;
+                    }
+                    // padding:2vw;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+// checkbox
+/*Checkboxes styles*/
+input[type="checkbox"] { display: none; }
+
+input[type="checkbox"] + label 
+,li#button_submit span{
+  display: block;
+  // position: relative;
+  // padding:2vw 0;
+  display: table-cell;
+  // height: 25vh;
+  vertical-align: middle;
+  width: 50vw;
+  @include break_smp(){
+      height: 20vh;
+  }
+  padding-left: 35px!important;
+  margin-bottom: 20px;
+  font-family:'Open Sans', Arial, sans-serif;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+ul.three_row{
+    input[type="checkbox"] + label
+    ,li#button_submit span{
+      height: 25vh;
+      @include break_smp(){
+          height: 20vh;
+      }
+    }
+}
+ul.two_row{
+    input[type="checkbox"] + label 
+    ,li#button_submit span{
+      height: 40vh;
+      @include break_smp(){
+          height: 38vh;
+      }
+    }
+}
+
+input[type="checkbox"] + label:last-child { margin-bottom: 0; }
+
+input[type="checkbox"] + label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ffffff;
+  position: absolute;
+  left: 2vw;;
+  top: calc(50% - 10px);
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+  width: 10px;
+  top: calc(50% - 15px);
+  left: calc(2vw + 5px);
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+// プログレスバー
+.progressWrapper {
+    width: 100%;
+    position:fixed;
+    bottom: 0;
+    @include break_pc(){
+        display: none;
+    }
+    input#time{
+        height: 8px;
+    }
+}
+
+progress {
+    /* Turn off default styling. */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    height: 5px;
+    width: 100%;
+    color: #dcdc11;       /* IE */
+    background: rgba(255,255,255,0.2); /* Firefox */
+}
+
+/* Chrome needs '-webkit-progress-value' and '-webkit-progress-bar' attributes. */
+progress::-webkit-progress-value {
+    background: #dcdc11;
+}
+
+progress::-webkit-progress-bar {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Firefox needs only '-moz-progress-bar' attiribute. */
+progress::-moz-progress-bar {
+    background: #dcdc11;
+}

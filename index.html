@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,target-densitydpi=medium-dpi,initial-scale=1,minimum-scale=1,shrink-to-fit=no">
+    <script src="./js/simid_protocol.js"> </script>
+    <script src="./js/base_simid_creative.js"> </script>
+    <script src="./js/jquery-3.5.1.min.js"> </script>
+    <link type="text/css" rel="stylesheet" media="all" href="./css/reset.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" media="all" href="./css/style.css">
+    <link type="text/css" rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Open+Sans">
+  </head>
+  <body>
+  <div class="simid_creative_wrapper" id="simid_creative">
+    <img id="button_privacy" src="./img/info.png">
+    <img id="button_fullscreen" src="./img/full.png">
+    <p id="debug_area" style="position: absolute;opacity: 0.5;width:300px;height: 100px;"></p>
+    <div v-for="(data, d_index) in all_data"  :key="d_index" >
+      <div class="question">
+        {{ data.question }}
+      </div>
+      <div class="options">
+        <ul>
+          <li v-for="(answer, a_index) in data.answers" :key="a_index" >
+              <input type="checkbox" name="a_index" v-bind:value="a_index" v-bind:id="d_index + '_' + a_index"><label v-bind:for="d_index + '_' + a_index">{{ answer }}</label>
+          </li>
+          <li id="button_submit"><span>アンケートをスキップ</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="progressWrapper">
+      <progress id="bar" value="0" max="1000" min="0"></progress>
+    </div>
+    <fieldset>
+      <input type="text" value="60000" id="time" style="visibility: hidden;" />
+    </fieldset>
+  </div>
+  <script src="./js/axios.min.js"> </script>
+  <script src="./js/vue-2.5.min.js"> </script>
+  <script src="./js/promise-6.1.0.min.js"> </script>
+  <script src="./js/app.js"> </script>
+  </body>
+</html>
