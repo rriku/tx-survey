@@ -93,7 +93,7 @@ class BaseSimidCreative {
   onStart(eventData) {
     // Acknowledge that the ad is started.
     this.simidProtocol.resolve(eventData, {});
-    console.log('Simid creative started')
+    console.log('TX survey creative started')
   }
 
   /** Called when the creative receives the fatal error message from the player.*/
@@ -106,7 +106,7 @@ class BaseSimidCreative {
   onAdStopped(eventData) {
     // After resolving the iframe with this ad should be cleaned up.
     this.simidProtocol.resolve(eventData, {});
-    console.log("Simid creative stopped");
+    console.log("TX survey creative stopped");
   }
 
   /** Called when the creative receives the skip message from the player.*/
@@ -151,13 +151,13 @@ class BaseSimidCreative {
   onPause() {
     this.videoState.paused = true;
     stopTimer();
-    console.log("Simid creative paused");
+    console.log("TX survey creative paused");
   }
 
   onPlay() {
     this.videoState.paused = false;
     resumeTimer();
-    console.log("Simid creative resumed");
+    console.log("TX survey creative resumed");
   }
 
   onPlaying() {
